@@ -1,0 +1,162 @@
+@charset "UTF-8";
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+/*=============== VARIABLES ===============*/
+:root {
+  /* Colors */
+  --primary-color: hsl(244, 75%, 57%);
+  --secondary-color: hsl(249, 64%, 47%);
+  --background-color: hsl(208, 97%, 85%);
+  --text-color: hsl(244, 4%, 36%);
+  --heading-color: hsl(244, 12%, 12%);
+  --light-color: hsla(244, 16%, 92%, 0.6);
+
+  /* Typography */
+  --font-family: "Poppins", sans-serif;
+  --font-size-normal: 1rem;
+  --font-size-small: 0.875rem;
+  --font-size-smaller: 0.813rem;
+
+  /* Font Weights */
+  --font-medium: 500;
+  --font-bold: 600;
+}
+
+/*=============== BASE STYLES ===============*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-normal);
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+h1, h2 {
+  color: var(--heading-color);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+h1 {
+  font-weight: var(--font-bold);
+  font-size: 1.75rem;
+}
+
+h2 {
+  font-weight: var(--font-medium);
+  font-size: 1.5rem;
+}
+
+form {
+  margin: 0 auto;
+  max-width: 400px;
+  background: var(--light-color);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 6px 24px hsla(244, 75%, 48%, 0.5);
+}
+
+label {
+  font-size: var(--font-size-small);
+  color: var(--heading-color);
+  margin-bottom: 0.5rem;
+  display: block;
+  font-weight: var(--font-medium);
+}
+
+select, button {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: var(--font-size-normal);
+  font-family: var(--font-family);
+  border-radius: 0.5rem;
+  border: 2px solid var(--primary-color);
+  background: var(--light-color);
+  color: var(--heading-color);
+  transition: 0.3s;
+}
+
+select:focus, button:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+}
+
+button {
+  background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+  color: #fff;
+  cursor: pointer;
+  font-weight: var(--font-bold);
+}
+
+button:hover {
+  background: var(--secondary-color);
+  box-shadow: 0 4px 10px hsla(249, 64%, 47%, 0.4);
+}
+
+/*=============== TIMETABLE ===============*/
+#timetable-container {
+  margin: 2rem auto;
+  padding: 2rem;
+  max-width: 600px;
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 6px 24px hsla(244, 75%, 48%, 0.5);
+}
+
+#timetable {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.time-slot {
+  min-width: 120px;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 2px solid var(--primary-color);
+  background-color: var(--light-color);
+  color: var(--primary-color);
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-size: var(--font-size-smaller);
+  transition: 0.3s;
+}
+
+.time-slot:hover {
+  background-color: hsla(244, 16%, 92%, 0.8);
+  border-color: var(--secondary-color);
+}
+
+.time-slot.selected {
+  background-color: var(--primary-color);
+  color: #fff;
+  border-color: var(--secondary-color);
+  box-shadow: 0 4px 10px hsla(244, 75%, 48%, 0.5);
+}
+
+#confirm-booking {
+  display: block;
+  margin: 2rem auto;
+  padding: 0.75rem 2rem;
+  max-width: 200px;
+  background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: var(--font-bold);
+  cursor: pointer;
+}
+
+#confirm-booking:hover {
+  background: var(--secondary-color);
+  box-shadow: 0 4px 10px hsla(249, 64%, 47%, 0.4);
+}

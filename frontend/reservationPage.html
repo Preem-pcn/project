@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Room Booking</title>
+    <link rel="stylesheet" href="assets/css/stylesReservationPage.css">
+</head>
+<body>
+    <h1>Meeting Room Booking</h1>
+    <form id="booking-form">
+        <div class="form-group">
+            <label for="room-select">Select a Room:</label>
+            <select id="room-select" required>
+                <option value="">-- Choose a Room --</option>
+                <option value="Room A">Room A</option>
+                <option value="Room B">Room B</option>
+                <option value="Room C">Room C</option>
+            </select>
+        </div>
+        <button type="button" id="show-timetable">Book Now</button>
+    </form>
+
+    <div id="timetable-container" style="display: none;">
+        <h2>Available Time Slots</h2>
+        <div id="timetable"></div>
+        <button type="button" id="confirm-booking" style="display: none;">Confirm Booking</button>
+    </div>
+
+    <script src="assets/js/reservationPage.js"></script>
+</body>
+</html>
