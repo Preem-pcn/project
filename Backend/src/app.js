@@ -18,11 +18,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 
-app.use("/api/users", userRoutes); // เส้นทางสำหรับ Users
-app.use("/api/rooms", roomRoutes); // เส้นทางสำหรับ Rooms
-app.use("/api/reservations", reservationRoutes); // เส้นทางสำหรับ Reservations
-app.use("/api/feedback", feedbackRoutes); // เส้นทางสำหรับ Feedback
-app.use("/api/recommendations", recommendationRoutes); // เส้นทางสำหรับ Recommendations
+app.use("/users", userRoutes); // เส้นทางสำหรับ Users
+app.use("/rooms", roomRoutes); // เส้นทางสำหรับ Rooms
+app.use("/reservations", reservationRoutes); // เส้นทางสำหรับ Reservations
+app.use("/feedback", feedbackRoutes); // เส้นทางสำหรับ Feedback
+app.use("/recommendations", recommendationRoutes); // เส้นทางสำหรับ Recommendations
 
 // การจัดการเส้นทางที่ไม่พบ
 app.use((req, res) => {
