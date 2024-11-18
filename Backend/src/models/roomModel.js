@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const mongoose = require('mongoose');
+
 
 // สร้าง Schema สำหรับ Rooms Collection
 const roomSchema = new mongoose.Schema({
@@ -30,9 +30,16 @@ const roomSchema = new mongoose.Schema({
     default: [] // ค่าเริ่มต้นเป็นอาร์เรย์ว่าง
   },
   availabilityStatus: {
-    type: String,
-    enum: ['available', 'unavailable'], // กำหนดสถานะว่า "available" หรือ "unavailable"
-    default: 'available' // ค่าเริ่มต้นเป็น "available"
+    type: Map,
+    of: String, // สถานะเป็น String (available/unavailable)
+    default: {
+      '08:00-10:00': 'available',
+      '10:00-12:00': 'available',
+      '12:00-14:00': 'available',
+      '14:00-16:00': 'available',
+      '16:00-18:00': 'available',
+      '18:00-20:00': 'available',
+    },
   },
   createdAt: {
     type: Date,
@@ -49,4 +56,4 @@ const roomSchema = new mongoose.Schema({
 // สร้าง Model สำหรับ Rooms Collection
 const Room = mongoose.model('Room', roomSchema);
 
-module.exports = Room;
+export default Room;

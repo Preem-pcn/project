@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const mongoose = require('mongoose');
+
 
 // สร้าง Schema สำหรับ Recommendations Collection
 const recommendationSchema = new mongoose.Schema({
@@ -35,4 +35,4 @@ const recommendationSchema = new mongoose.Schema({
 // สร้าง Model สำหรับ Recommendations Collection
 const Recommendation = mongoose.model('Recommendation', recommendationSchema);
 
-module.exports = Recommendation;
+export default Recommendation;

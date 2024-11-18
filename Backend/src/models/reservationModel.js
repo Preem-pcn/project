@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const mongoose = require('mongoose');
+
 
 // สร้าง Schema สำหรับ Reservations Collection
 const reservationSchema = new mongoose.Schema({
@@ -52,4 +52,4 @@ const reservationSchema = new mongoose.Schema({
 // สร้าง Model สำหรับ Reservations Collection
 const Reservation = mongoose.model('Reservation', reservationSchema);
 
-module.exports = Reservation;
+export default Reservation;

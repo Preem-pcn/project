@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const mongoose = require('mongoose');
+
 
 // สร้าง Schema สำหรับ Feedback Collection
 const feedbackSchema = new mongoose.Schema({
@@ -42,4 +42,4 @@ const feedbackSchema = new mongoose.Schema({
 // สร้าง Model สำหรับ Feedback Collection
 const Feedback = mongoose.model('Feedback', feedbackSchema);
 
-module.exports = Feedback;
+export default Feedback;

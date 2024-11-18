@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-const mongoose = require('mongoose');
 
 // สร้าง Schema สำหรับ Users Collection
 const userSchema = new mongoose.Schema({
@@ -47,4 +46,4 @@ const userSchema = new mongoose.Schema({
 // สร้าง Model สำหรับ Users Collection
 const User = mongoose.model('User', userSchema);
 
-module.exports = User;
+export default User;
