@@ -1,13 +1,13 @@
-const express = require('express');
+import express from "express";
 import * as userController from "../controllers/userController.js"; // Import ฟังก์ชันทั้งหมดเป็นออบเจ็กต์
-
 
 const router = express.Router();
 
-//router.get('/', getUsers); // ดึงข้อมูลผู้ใช้ทั้งหมด
-router.get('/:id', getUserById); // ดึงข้อมูลผู้ใช้ตาม ID
-router.post('/', createUser); // สร้างผู้ใช้ใหม่
-router.put('/:id', updateUser); // อัปเดตข้อมูลผู้ใช้
-router.delete('/:id', deleteUser); // ลบผู้ใช้
+//router.get("/", userController.getUsers); // ใช้ฟังก์ชันผ่านออบเจ็กต์
+router.get("/:id", userController.getUserById);
+router.post("/", userController.createUser);
+router.put("/:id", userController.updateUser);
+router.delete("/:id", userController.deleteUser);
 
-module.exports = router;
+export default router;
+
