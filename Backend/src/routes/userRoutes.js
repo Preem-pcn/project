@@ -3,7 +3,7 @@ import * as userController from "../controllers/userController.js"; // Import �
 
 const router = express.Router();
 
-//router.get("/", userController.getUsers); // ใช้ฟังก์ชันผ่านออบเจ็กต์
+router.get("/", userController.getUsers); // ใช้ฟังก์ชันผ่านออบเจ็กต์
 router.get("/:id", userController.getUserById);
 router.post("/", userController.createUser);
 router.put("/:id", userController.updateUser);

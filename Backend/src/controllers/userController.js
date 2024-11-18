@@ -1,19 +1,21 @@
 import User from "../models/userModel.js";
 
-// // [GET] ดึงข้อมูลผู้ใช้ทั้งหมด
-// export const getUsers = async (req, res) => {
-//   try {
-//     const users = await User.find(); // ค้นหาผู้ใช้ทั้งหมด
-//     res.status(200).json(users);
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
+// [GET] ดึงข้อมูลผู้ใช้ทั้งหมด for test
+export const getUsers = async (req, res) => {
+  try {
+    const users = await User.find(); // ค้นหาผู้ใช้ทั้งหมด
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 // [GET] ดึงข้อมูลผู้ใช้ตาม ID
 export const getUserById = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id); // ค้นหาผู้ใช้ตาม ID
+    //const user = await User.findById(req.params.id); // ค้นหาผู้ใช้ตาม ID
+    const { userId } = req.body;
+    const user = await User.findOne({ userId: userId });
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
@@ -32,7 +34,7 @@ export const createUser = async (req, res) => {
     username,
     passwordHash,
     email,
-    role,
+    role: "student",
   });
 
   try {

@@ -3,7 +3,7 @@ import cors from "cors";
 
 
 import userRoutes from "./routes/userRoutes.js";
-// import roomRoutes from "./routes/roomRoutes.js";
+import roomRoutes from "./routes/roomRoutes.js";
 // import reservationRoutes from "./routes/reservationRoutes.js";
 // import feedbackRoutes from "./routes/feedbackRoutes.js";
 // import recommendationRoutes from "./routes/recommendationRoutes.js";
