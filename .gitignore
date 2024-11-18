@@ -1,0 +1,69 @@
+# Node.js modules
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Dependency directories
+bower_components/
+jspm_packages/
+
+# Build output
+dist/
+build/
+out/
+.tmp/
+coverage/
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.orig
+*.patch
+
+# Compiled assets
+*.css.map
+*.js.map
+*.css
+*.min.js
+*.min.css
+
+# Static files (if built separately)
+public/assets/
+
+# Testing
+*.test.js
+*.test.ts
+coverage/
+jest-cache/
+jest-output/
+
+# Framework specific (if applicable)
+.next/          # Next.js
+.nuxt/          # Nuxt.js
+.svelte-kit/    # SvelteKit
+.pnpm-debug.log # PNPM
+
+# Cache and package-lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
