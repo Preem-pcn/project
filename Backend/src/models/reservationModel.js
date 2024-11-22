@@ -19,23 +19,18 @@ const reservationSchema = new mongoose.Schema({
     required: true, // เชื่อมโยงกับ User ID
     trim: true
   },
-  startTime: {
-    type: Date,
-    required: true // เวลาที่เริ่มการจอง
+  date: {
+    type: Date, // เก็บวันที่ของการจอง
+    required: true,
   },
-  endTime: {
-    type: Date,
-    required: true // เวลาที่สิ้นสุดการจอง
+  timeSlot: {
+    type: String, // "${startTime}-${endTime}"
+    required: true,
   },
   status: {
     type: String,
-    enum: ['pending', 'approved', 'cancelled'], // สถานะการจอง
-    default: 'pending' // ค่าเริ่มต้นเป็น "pending"
-  },
-  purpose: {
-    type: String, // จุดประสงค์การจอง (ถ้ามี)
-    trim: true,
-    default: '' // ค่าเริ่มต้นเป็นค่าว่าง
+    enum: ["reserved", "cancelled"], // สถานะการจอง
+    default: "reserved",
   },
   createdAt: {
     type: Date,
@@ -48,6 +43,8 @@ const reservationSchema = new mongoose.Schema({
 }, {
   timestamps: true // สร้างฟิลด์ createdAt และ updatedAt ให้อัตโนมัติ
 });
+
+reservationSchema.index({ userId: 1, date: 1, timeSlot: 1 }, { unique: true });
 
 // สร้าง Model สำหรับ Reservations Collection
 const Reservation = mongoose.model('Reservation', reservationSchema);

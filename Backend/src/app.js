@@ -20,7 +20,7 @@ app.use(cors());
 
 app.use("/users", userRoutes); // เส้นทางสำหรับ Users
 app.use("/rooms", roomRoutes); // เส้นทางสำหรับ Rooms
-//app.use("/reservations", reservationRoutes); // เส้นทางสำหรับ Reservations
+app.use("/reservations", reservationRoutes); // เส้นทางสำหรับ Reservations
 // app.use("/feedback", feedbackRoutes); // เส้นทางสำหรับ Feedback
 // app.use("/recommendations", recommendationRoutes); // เส้นทางสำหรับ Recommendations
 

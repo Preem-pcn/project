@@ -1,32 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meeting Room Booking</title>
-    <link rel="stylesheet" href="assets/css/stylesReservationPage.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meeting Room Reservation</title>
+  <link rel="stylesheet" href="assets/css/stylesReservationPage.css">
 </head>
 <body>
-    <h1>Meeting Room Booking</h1>
-    <form id="booking-form">
-        <div class="form-group">
-            <label for="room-select">Select a Room:</label>
-            <select id="room-select" required>
-                <option value="">-- Choose a Room --</option>
-                <option value="Room A">Room A</option>
-                <option value="Room B">Room B</option>
-                <option value="Room C">Room C</option>
-            </select>
-        </div>
-        <button type="button" id="show-timetable">Book Now</button>
-    </form>
-
-    <div id="timetable-container" style="display: none;">
-        <h2>Available Time Slots</h2>
-        <div id="timetable"></div>
-        <button type="button" id="confirm-booking" style="display: none;">Confirm Booking</button>
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <button id="back-btn">←</button>
     </div>
 
-    <script src="assets/js/reservationPage.js"></script>
+    <!-- Main Content -->
+    <div class="main-content">
+      <h1 class="title">Meeting Room Booking</h1>
+      <div class="reservation-form">
+        <label for="time-select" class="form-label">Select Time:</label>
+        <select id="time-select" class="form-input">
+          <option value="8:00-10:00">8:00 AM - 10:00 AM</option>
+          <option value="10:00-12:00">10:00 AM - 12:00 PM</option>
+          <option value="12:00-14:00">12:00 PM - 2:00 PM</option>
+          <option value="14:00-16:00">2:00 PM - 4:00 PM</option>
+          <option value="16:00-18:00">4:00 PM - 6:00 PM</option>
+          <option value="18:00-20:00">6:00 PM - 8:00 PM</option>
+        </select>
+        <button id="search-btn" class="form-btn">Search</button>
+      </div>
+      <div id="room-options" class="room-options"></div>
+    </div>
+
+    <!-- Profile Widget -->
+    <div class="profile-widget">
+      <button id="profile-btn" class="profile-btn">👤</button>
+    </div>
+  </div>
+
+  <script src="assets/js/reservationPage.js"></script>
 </body>
 </html>
