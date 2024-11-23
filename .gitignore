@@ -40,30 +40,35 @@ coverage/
 *.orig
 *.patch
 
-# Compiled assets
+# Compiled asset maps
 *.css.map
 *.js.map
-*.css
+
+# Minified files
 *.min.js
 *.min.css
 
-# Static files (if built separately)
+# Cache and lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Static files (optional, if dynamically generated)
 public/assets/
 
-# Testing
+# Testing output
 *.test.js
 *.test.ts
 coverage/
 jest-cache/
 jest-output/
 
-# Framework specific (if applicable)
+# Framework-specific ignores
 .next/          # Next.js
 .nuxt/          # Nuxt.js
 .svelte-kit/    # SvelteKit
 .pnpm-debug.log # PNPM
 
-# Cache and package-lock files
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
+# CSS files (Ignore all but allow exceptions)
+*.css
+!frontend/assets/css/stylesIndex.css
