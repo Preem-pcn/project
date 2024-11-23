@@ -1,8 +1,8 @@
 import Reservation from "../models/reservationModel.js";
 import Room from "../models/roomModel.js";
 
-export const reserveRoom = async (req, res) => {
-  const { userId, roomId, date, timeSlot, purpose } = req.body;
+export const createReservation = async (req, res) => {
+  const { userId, roomId, date, timeSlot} = req.body;
 
   try {
     // ตรวจสอบว่าผู้ใช้มีการจองช่วงเวลาอื่นในวันเดียวกันหรือไม่
@@ -41,7 +41,7 @@ export const reserveRoom = async (req, res) => {
       roomId,
       date,
       timeSlot,
-      purpose,
+      status: "approved",
     });
 
     return res.status(201).json({
@@ -56,36 +56,35 @@ export const reserveRoom = async (req, res) => {
 };
 
 export const cancelReservation = async (req, res) => {
-    const { reservationId } = req.body;
-  
-    try {
-      // หา Reservation ที่ต้องการยกเลิก
-      const reservation = await Reservation.findOne({ reservationId });
-      if (!reservation) {
-        return res.status(404).json({
-          success: false,
-          message: "Reservation not found.",
-        });
-      }
-  
-      // อัปเดตสถานะห้องให้ว่าง
-      const room = await Room.findOne({ roomId: reservation.roomId });
-      if (room) {
-        room.availabilityStatus.set(reservation.timeSlot, "available");
-        await room.save();
-      }
-  
-      // ยกเลิกการจอง
-      reservation.status = "cancelled";
-      await reservation.save();
-  
-      return res.status(200).json({
-        success: true,
-        message: "Reservation cancelled successfully.",
+  const { roomId, timeSlot } = req.body;
+
+  try {
+    // หา Reservation ที่ต้องการยกเลิก
+    const reservation = await Reservation.findOne({ roomId, timeSlot });
+    if (!reservation) {
+      return res.status(404).json({
+        success: false,
+        message: "Reservation not found.",
       });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ success: false, message: "Failed to cancel reservation." });
     }
-  };
-  
+
+    // อัปเดตสถานะห้องให้ว่าง
+    const room = await Room.findOne({ roomId: reservation.roomId });
+    if (room) {
+      room.availabilityStatus.set(reservation.timeSlot, "available");
+      await room.save();
+    }
+
+    // ยกเลิกการจอง
+    reservation.status = "cancelled";
+    await reservation.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Reservation cancelled successfully.",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Failed to cancel reservation." });
+  }
+};

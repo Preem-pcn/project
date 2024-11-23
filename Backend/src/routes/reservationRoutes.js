@@ -4,9 +4,7 @@ import * as reservationController from "../controllers/ReservationController.js"
 const router = express.Router();
 
 
-router.post("/reserve", createReservation);
-router.get("/user/:userId", getUserReservations);
-router.post("/cancel", cancelReservation);
-router.post("/approve", approveReservation);
+router.post("/reserve", reservationController.createReservation);
+router.post("/cancel", reservationController.cancelReservation);
 
 export default router;

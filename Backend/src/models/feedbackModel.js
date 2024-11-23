@@ -26,11 +26,6 @@ const feedbackSchema = new mongoose.Schema({
     min: 1, // คะแนนขั้นต่ำ
     max: 5 // คะแนนสูงสุด
   },
-  comments: {
-    type: String, // คำอธิบายเพิ่มเติม
-    trim: true,
-    default: '' // ค่าเริ่มต้นเป็นค่าว่าง
-  },
   createdAt: {
     type: Date,
     default: Date.now // ค่าเริ่มต้นเป็นเวลาปัจจุบัน

@@ -29,8 +29,8 @@ const reservationSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["reserved", "cancelled"], // สถานะการจอง
-    default: "reserved",
+    enum: ["approved", "cancelled"], // สถานะการจอง
+    default: "approved",
   },
   createdAt: {
     type: Date,
