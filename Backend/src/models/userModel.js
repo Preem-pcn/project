@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
     unique: true, // Username ต้องไม่ซ้ำกัน
     trim: true
   },
-  passwordHash: {
+  password: {
     type: String,
     required: true // รหัสผ่านต้องถูกแฮชแล้ว
   },

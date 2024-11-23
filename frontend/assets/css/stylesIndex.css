@@ -1,0 +1,153 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #f7f7f7, #eaeaea);
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 10px; /* Add padding for small screens */
+}
+
+/* Container */
+.container {
+    width: 90%;
+    max-width: 450px;
+    background: linear-gradient(135deg, #ffffff, #f5f5f5);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    transition: all 0.3s ease-in-out; /* Smooth resizing */
+}
+
+/* Content */
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    font-size: clamp(20px, 5vw, 28px); /* Responsive font size */
+    font-weight: bold;
+    color: #111;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: clamp(14px, 3vw, 16px); /* Responsive text */
+    color: #666;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+form {
+    width: 100%;
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #111;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    background-color: #f9f9f9;
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: #666;
+    outline: none;
+}
+
+/* Buttons */
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+button {
+    flex: 1;
+    padding: 15px 0;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn.primary {
+    background: linear-gradient(135deg, #333, #555);
+    color: #fff;
+}
+
+.btn.primary:hover {
+    background: linear-gradient(135deg, #555, #777);
+}
+
+.btn.secondary {
+    background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+.btn.secondary:hover {
+    background: linear-gradient(135deg, #eaeaea, #d9d9d9);
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .buttons {
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    input {
+        font-size: 14px;
+        padding: 10px; /* Smaller padding */
+    }
+
+    button {
+        font-size: 14px;
+        padding: 12px;
+    }
+}

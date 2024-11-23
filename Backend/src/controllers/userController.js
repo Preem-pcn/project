@@ -27,14 +27,14 @@ export const getUserById = async (req, res) => {
 
 // [POST] สร้างผู้ใช้ใหม่
 export const createUser = async (req, res) => {
-  const { userId, username, passwordHash, email, role } = req.body;
+  const { userId, username, password, email, role } = req.body;
 
   const newUser = new User({
     userId,
     username,
-    passwordHash,
+    password,
     email,
-    role: "student",
+    role: "user",
   });
 
   try {
@@ -74,5 +74,46 @@ export const deleteUser = async (req, res) => {
     res.status(200).json({ message: "User deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+};
+
+// Login User
+export const loginUser = async (req, res) => {
+  const { userId, password } = req.body;
+
+  try {
+    // ตรวจสอบว่า userId มีอยู่ในระบบหรือไม่
+    const user = await User.findOne({ userId });
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found.",
+      });
+    }
+
+    // ตรวจสอบว่า password ตรงกับฐานข้อมูลหรือไม่
+    if (user.password !== password) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid credentials.",
+      });
+    }
+
+    // Login สำเร็จ
+    return res.status(200).json({
+      success: true,
+      message: "Login successful.",
+      data: {
+        userId: user.userId,
+        name: user.name,
+        role: user.role,
+      },
+    });
+  } catch (error) {
+    console.error("Error logging in user:", error);
+    return res.status(500).json({
+      success: false,
+      message: "An error occurred during login.",
+    });
   }
 };

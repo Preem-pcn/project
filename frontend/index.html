@@ -1,71 +1,32 @@
 <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <!--=============== REMIXICONS ===============-->
-        <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-
-        <!--=============== CSS ===============-->
-        <link rel="stylesheet" href="assets/css/styles.css">
-
-        <title>Beautiful glass login form - Bedimcode</title>
-    </head>
-    <body>
-        <div class="container">
-            <div class="login__content">
-                <img src="assets/img/bg-login.png" alt="login image" class="login__img">
-
-                <form action="" class="login__form">
-                    <div>
-                        <h1 class="login__title">
-                            <span>Welcome</span> Back
-                        </h1>
-                        <p class="login__description">
-                            Welcome! Please login to continue.
-                        </p>
-                    </div>
-                    
-                    <div>
-                        <div class="login__inputs">
-                            <div>
-                                <label for="input-email" class="login__label">Email</label>
-                                <input type="email" placeholder="Enter your email address" required class="login__input" id="input-email">
-                            </div>
-    
-                            <div>
-                                <label for="input-pass" class="login__label">Password</label>
-    
-                                <div class="login__box">
-                                    <input type="password" placeholder="Enter your password" required class="login__input" id="input-pass">
-                                    <i class="ri-eye-off-line login__eye" id="input-icon"></i>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="login__check">
-                            <input type="checkbox" class="login__check-input" id="input-check">
-                            <label for="input-check" class="login__check-label">Remember me</label>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="login__buttons">
-                            <button class="login__button">Log In</button>
-                            <button class="login__button login__button-ghost" onclick="window.location.href='signup.html'">Sign Up</button>
-            
-
-                        </div>
-
-                        <a href="#" class="login__forgot">Forgot Password?</a>
-                    </div>
-                </form>
-            </div>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="assets/css/stylesIndex.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <h1>Welcome Back!</h1>
+            <p>Please log in to your account to continue.</p>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="userID">User ID</label>
+                    <input type="text" id="userID" placeholder="Enter your User ID">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your Password">
+                </div>
+                <div class="buttons">
+                    <button type="button" id="loginBtn" class="btn primary">LOG IN</button>
+                    <button type="button" id="signupBtn" class="btn secondary">SIGN UP</button>
+                </div>
+            </form>
         </div>
-
-
-        <!--=============== MAIN JS ===============-->
-        <script src="assets/js/main.js"></script>
-    </body>
+    </div>
+    <script type="module" src="assets/js/index.js"></script>
+</body>
 </html>
