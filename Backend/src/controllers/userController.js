@@ -64,6 +64,43 @@ export const updateUser = async (req, res) => {
   }
 };
 
+// [PUT] Update user information by userId
+export const updateUserByUserId = async (req, res) => {
+  const { userId, updates } = req.body;  // Ensure userId and updates are in the body
+
+  console.log('Received userId:', userId); // Log received userId
+  console.log('Received updates:', updates); // Log received updates
+
+  // Filter updates to allow only specific fields
+  const allowedFields = ['username', 'email', 'password'];
+  const filteredUpdates = Object.keys(updates)
+    .filter(key => allowedFields.includes(key))
+    .reduce((obj, key) => {
+      obj[key] = updates[key];
+      return obj;
+    }, {});
+
+  try {
+    // Use userId (not _id) to find the user and update
+    const user = await User.findOneAndUpdate(
+      { userId }, // Find user by userId field
+      filteredUpdates, // Apply the filtered updates
+      { new: true, runValidators: true } // Ensure we return the updated document
+    );
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.status(200).json(user); // Return the updated user
+  } catch (error) {
+    console.error("Error during update:", error); // Log detailed error for debugging
+    res.status(500).json({ message: error.message }); // Return a 500 error
+  }
+};
+
+
+
 // [DELETE] ลบผู้ใช้
 export const deleteUser = async (req, res) => {
   try {

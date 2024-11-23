@@ -5,7 +5,8 @@ const router = express.Router();
 
 router.get("/", roomController.getRooms); // ใช้ฟังก์ชันผ่านออบเจ็กต์
 router.post("/insert-many", roomController.insertManyRooms);
-router.get("/available", roomController.getRoomByAvailableTime);
-
+//router.post("/available", roomController.getRoomByAvailableTime);
+router.post("/available", roomController.getRoomByAvailableTime);
+  
 export default router;
 

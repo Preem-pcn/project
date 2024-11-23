@@ -69,6 +69,6 @@ jest-output/
 .svelte-kit/    # SvelteKit
 .pnpm-debug.log # PNPM
 
-# CSS files (Ignore all but allow exceptions)
-*.css
-!frontend/assets/css/stylesIndex.css
+# Allow only specific CSS files
+*.css                # Ignore all CSS files
+!frontend/assets/css/*.css  # Allow CSS files in the specific directory

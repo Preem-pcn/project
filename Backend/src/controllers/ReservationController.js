@@ -39,7 +39,7 @@ export const createReservation = async (req, res) => {
       reservationId: `RES-${Date.now()}`,
       userId,
       roomId,
-      date,
+      date: new Date() ,
       timeSlot,
       status: "approved",
     });

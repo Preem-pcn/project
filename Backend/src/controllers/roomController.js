@@ -64,7 +64,8 @@ export const insertManyRooms = async (req, res) => {
 // ฟังก์ชันในการดึงห้องประชุมที่มีสถานะ 'available' ตามช่วงเวลาที่เลือก
 export const getRoomByAvailableTime = async (req, res) => {
     const { timeSlot } = req.body; // รับข้อมูล timeSlot จาก body request (เช่น "08:00-10:00")
-
+    console.log("Received request at /rooms/available");
+    console.log("Request body:", req.body); // ดูว่า body ถูกส่งมาถูกต้องหรือไม่
     // ตรวจสอบว่า timeSlot เป็นค่าว่างหรือไม่
     if (!timeSlot) {
       return res.status(400).json({
@@ -87,10 +88,16 @@ export const getRoomByAvailableTime = async (req, res) => {
         });
       }
 
+      const roomData = rooms.map(room => ({
+        name: room.roomId, // ชื่อห้อง
+        capacity: room.capacity, // ความจุ
+        facilities: room.amenities, // สิ่งอำนวยความสะดวก
+      }));
+
       // ถ้าพบห้องที่มีสถานะ available
       return res.status(200).json({
         success: true,
-        data: rooms,
+        data: roomData, // ส่งเฉพาะชื่อห้อง
       });
     } catch (error) {
       console.error("Error fetching rooms:", error);
