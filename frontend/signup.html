@@ -18,7 +18,7 @@
 
         <!-- Right Section (Sign-up Form) -->
         <div class="login__content">
-            <form action="" class="login__form">
+            <form action="index.html" class="login__form">
                 <div>
                     <h1 class="login__title">
                         <span>Sign</span> Up
@@ -54,8 +54,20 @@
                 </div>
 
                 <div class="login__buttons">
-                    <button type="button" class="login__button login__button-ghost" onclick="window.history.back()">Back</button>
-                    <button type="submit" class="login__button">Register</button>
+                    <!-- Back Button -->
+                    <button 
+                        type="button" 
+                        class="login__button login__button-ghost" 
+                        onclick="window.location.href='index.html'">
+                        Back
+                    </button>
+
+                    <!-- Register Button -->
+                    <button 
+                        type="submit" 
+                        class="login__button">
+                        Register
+                    </button>
                 </div>
             </form>
         </div>
