@@ -57,6 +57,7 @@ document.querySelector('.login__form').addEventListener('submit', async (event) 
     if (response.ok) {
       const result = await response.json();
       alert("Success"); // Show success message
+      window.location.href = 'index.html';
     } else {
       alert('Failed to create user.');
     }
@@ -65,5 +66,4 @@ document.querySelector('.login__form').addEventListener('submit', async (event) 
     alert('An error occurred while creating the user.');
   }
 });
-
   

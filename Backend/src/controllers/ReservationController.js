@@ -6,11 +6,11 @@ export const createReservation = async (req, res) => {
 
   try {
     // ตรวจสอบว่าผู้ใช้มีการจองช่วงเวลาอื่นในวันเดียวกันหรือไม่
-    const existingReservation = await Reservation.findOne({ userId, date, timeSlot });
+    const existingReservation = await Reservation.findOne({ userId, date,status: { $ne: "cancelled" } });
     if (existingReservation) {
       return res.status(400).json({
         success: false,
-        message: "You have already booked a room for this time slot.",
+        message: "You have already booked a room.",
       });
     }
 
@@ -39,7 +39,7 @@ export const createReservation = async (req, res) => {
       reservationId: `RES-${Date.now()}`,
       userId,
       roomId,
-      date: new Date() ,
+      date: date,
       timeSlot,
       status: "approved",
     });
@@ -55,36 +55,108 @@ export const createReservation = async (req, res) => {
   }
 };
 
-export const cancelReservation = async (req, res) => {
-  const { roomId, timeSlot } = req.body;
-
+export const checkUserReservation = async (req, res) => {
+  const { userId } = req.body; // Get `userId` from the request body
+  
   try {
-    // หา Reservation ที่ต้องการยกเลิก
-    const reservation = await Reservation.findOne({ roomId, timeSlot });
+    // Find a single active reservation (not cancelled) for the user
+    const reservation = await Reservation.findOne({
+      userId,
+      status: { $ne: "cancelled" }, // Exclude cancelled reservations
+    });
+
     if (!reservation) {
       return res.status(404).json({
         success: false,
-        message: "Reservation not found.",
+        message: "No active reservations found for this user.",
       });
     }
 
-    // อัปเดตสถานะห้องให้ว่าง
-    const room = await Room.findOne({ roomId: reservation.roomId });
-    if (room) {
-      room.availabilityStatus.set(reservation.timeSlot, "available");
-      await room.save();
-    }
-
-    // ยกเลิกการจอง
-    reservation.status = "cancelled";
-    await reservation.save();
-
+    // Return the reservation data
     return res.status(200).json({
       success: true,
-      message: "Reservation cancelled successfully.",
+      data: reservation, // Send back the reservation data
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false, message: "Failed to cancel reservation." });
+    res.status(500).json({
+      success: false,
+      message: "Failed to check user reservation.",
+    });
+  }
+};
+
+
+// export const cancelReservation = async (req, res) => {
+//   const { userId } = req.body; // รับแค่ userId จาก body
+
+//   try {
+//     // ค้นหาการจองทั้งหมดที่ผู้ใช้ทำไว้ (ไม่ว่าจะเป็นห้องใดๆ และช่วงเวลาใดๆ)
+//     const reservations = await Reservation.find({ userId, status: { $ne: "cancelled" } });
+
+//     if (reservations.length === 0) {
+//       return res.status(404).json({
+//         success: false,
+//         message: "No active reservations found for this user.",
+//       });
+//     }
+
+//     // อัปเดตสถานะห้องให้ว่างและยกเลิกการจอง
+//     for (let reservation of reservations) {
+//       const room = await Room.findOne({ roomId: reservation.roomId });
+//       if (room) {
+//         room.availabilityStatus.set(reservation.timeSlot, "available");
+//         await room.save();
+//       }
+
+//       // เปลี่ยนสถานะการจองเป็น cancelled
+//       reservation.status = "cancelled";
+//       await reservation.save();
+//     }
+
+//     return res.status(200).json({
+//       success: true,
+//       message: "All reservations for this user have been cancelled successfully.",
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ success: false, message: "Failed to cancel reservations." });
+//   }
+// };
+
+export const cancelReservation = async (req, res) => {
+  const { userId } = req.body; // รับแค่ userId จาก body
+
+  try {
+    // ค้นหาการจองทั้งหมดที่ผู้ใช้ทำไว้ (ไม่ว่าจะเป็นห้องใดๆ และช่วงเวลาใดๆ)
+    const reservations = await Reservation.find({ userId, status: { $ne: "cancelled" } });
+
+    if (reservations.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "No active reservations found for this user.",
+      });
+    }
+
+    // ลบการจองทั้งหมดที่พบ
+    for (let reservation of reservations) {
+      // ลบการจองจากฐานข้อมูล
+      await Reservation.deleteOne({ userId : reservation.userId});
+
+      // อัปเดตสถานะห้องให้ว่าง
+      const room = await Room.findOne({ roomId: reservation.roomId });
+      if (room) {
+        room.availabilityStatus.set(reservation.timeSlot, "available");
+        await room.save();
+      }
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "All reservations for this user have been cancelled and removed successfully.",
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Failed to cancel and remove reservations." });
   }
 };

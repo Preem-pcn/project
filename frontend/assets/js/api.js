@@ -76,23 +76,24 @@ export async function getUserById(userId) {
   }
 }
 
-export async function updateUser(userId, updates) {
+export async function updateUser(userId, { username, email, password, oldPassword }) {
   try {
     const response = await fetch(`${BACKEND_URL}/users/updateByUserId`, {
-      method: "PUT",
+      method: "PUT", // PUT for updates
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ userId, updates }),
+      body: JSON.stringify({ userId, oldPassword, username, email, password }), // Send required data
     });
 
     if (response.ok) {
       const updatedUser = await response.json(); // Parse the updated user data
       alert("User updated successfully!");
-      return updatedUser;
+      return updatedUser.user; // Return only the user object from the response
     } else {
-      console.error("Failed to update user:", response.statusText);
-      alert("Failed to update user.");
+      const errorData = await response.json();
+      console.error("Failed to update user:", errorData.message);
+      alert(`Failed to update user: ${errorData.message}`);
       return null;
     }
   } catch (error) {
@@ -112,7 +113,7 @@ export async function reserveRoom(userId, roomId, timeSlot) {
       headers: {
         'Content-Type': 'application/json', // กำหนดให้เป็น JSON
       },
-      body: JSON.stringify({ userId, roomId, date:Date.now,timeSlot }), // ส่งข้อมูลใน body
+      body: JSON.stringify({ userId, roomId, date:new Date().toISOString().split('T')[0],timeSlot }), // ส่งข้อมูลใน body
     });
 
     // ตรวจสอบสถานะของการตอบกลับ
@@ -132,27 +133,55 @@ export async function reserveRoom(userId, roomId, timeSlot) {
 }
 
 
-export async function cancelReservation(roomId, timeSlot) {
+export async function cancelReservation(userId) {
   try {
     const response = await fetch(`${BACKEND_URL}/reservations/cancel`, {
-      method: 'POST', // ใช้ POST method
+      method: 'POST', // ใช้ POST สำหรับส่งข้อมูล
       headers: {
-        'Content-Type': 'application/json', // กำหนดให้เป็น JSON
+        'Content-Type': 'application/json', // กำหนด header เป็น JSON
       },
-      body: JSON.stringify({
-        roomId, // ส่ง roomId ไปใน body
-        timeSlot, // ส่ง timeSlot ไปใน body
-      }),
-    
+      body: JSON.stringify({ userId }), // ส่ง userId ไปยัง backend
     });
-    const result = await response.json();
-    if (response.ok) {
-      alert(result.message); // แจ้งข้อความจาก backend
-    } else {
-      alert(`Error: ${result.message}`);
+    console.log(response);
+    if (!response.ok) {
+      // กรณีที่ response status ไม่ใช่ 200
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Failed to cancel reservations.');
     }
+
+    const data = await response.json();
+    return data; // ส่งคืนข้อมูลสำเร็จจาก backend
   } catch (error) {
-    console.error('Error:', error);
-    alert('Failed to cancel reservation.');
+    console.error('Error cancelling reservation:', error);
+    return {
+      success: false,
+      message: error.message || 'An unexpected error occurred.',
+    };
+  }
+}
+
+export async function checkUserReservation(userId) {
+  try {
+    const response = await fetch(`${BACKEND_URL}/reservations/check-reservation`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      // ตรวจสอบว่าข้อผิดพลาดเกิดจาก "ไม่พบการจอง"
+      if (response.status === 404) {
+        return false; // ส่งคืน false หากไม่พบการจอง
+      }
+      throw new Error(errorData.message || 'Failed to check user reservation.');
+    }
+    const data = await response.json();
+    return data; // ส่งคืนข้อมูลการจองที่พบ
+  } catch (error) {
+    console.error('Error checking user reservation:', error);
+    return false; // ส่งคืน false กรณีเกิดข้อผิดพลาด
   }
 }

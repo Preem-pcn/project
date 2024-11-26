@@ -45,59 +45,49 @@ export const createUser = async (req, res) => {
   }
 };
 
-// [PUT] อัปเดตข้อมูลผู้ใช้
-export const updateUser = async (req, res) => {
-  try {
-    const updatedUser = await User.findByIdAndUpdate(
-      req.params.id,
-      req.body, // ข้อมูลใหม่ที่ต้องการอัปเดต
-      { new: true, runValidators: true } // คืนค่าที่อัปเดตแล้วและตรวจสอบข้อมูล
-    );
 
-    if (!updatedUser) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    res.status(200).json(updatedUser);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
 
 // [PUT] Update user information by userId
 export const updateUserByUserId = async (req, res) => {
-  const { userId, updates } = req.body;  // Ensure userId and updates are in the body
-
-  console.log('Received userId:', userId); // Log received userId
-  console.log('Received updates:', updates); // Log received updates
-
-  // Filter updates to allow only specific fields
-  const allowedFields = ['username', 'email', 'password'];
-  const filteredUpdates = Object.keys(updates)
-    .filter(key => allowedFields.includes(key))
-    .reduce((obj, key) => {
-      obj[key] = updates[key];
-      return obj;
-    }, {});
-
+  const { userId, oldPassword, username, email, password } = req.body;
+  
   try {
-    // Use userId (not _id) to find the user and update
-    const user = await User.findOneAndUpdate(
-      { userId }, // Find user by userId field
-      filteredUpdates, // Apply the filtered updates
-      { new: true, runValidators: true } // Ensure we return the updated document
-    );
-
+    // Fetch the user by userId
+    const user = await User.findOne({ userId });
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: 'User not found.' });
     }
 
-    res.status(200).json(user); // Return the updated user
+    // Validate the old password
+    if (user.password !== oldPassword) {
+      return res.status(403).json({ message: 'Incorrect current password.' });
+    }
+
+    // Update allowed fields
+    if (username) user.username = username;
+    if (email) user.email = email;
+    if (password) user.password = password; // Save the new password as plain text
+
+    // Save updated user data
+    const updatedUser = await user.save();
+
+    // Respond with updated details
+    res.status(200).json({
+      message: 'Profile updated successfully.',
+      user: {
+        userId: updatedUser.userId,
+        username: updatedUser.username,
+        email: updatedUser.email,
+      },
+    });
   } catch (error) {
-    console.error("Error during update:", error); // Log detailed error for debugging
-    res.status(500).json({ message: error.message }); // Return a 500 error
+    console.error(error);
+    res.status(500).json({ message: 'Failed to update user profile.', error: error.message });
   }
 };
+
+//export default { updateUserByUserId };
+
 
 
 

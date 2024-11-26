@@ -1,334 +1,489 @@
 /* General Styles */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(to bottom right, #ffffff, #f0f0f0);
-    color: #333;
-    overflow-x: hidden;
-  }
-  
-  .container {
-    display: flex;
-    flex-direction: row;
-    height: 100vh;
-    width: 100%;
-  }
-  
-  .sidebar {
-    background: #6e6e6e;
-    color: #fff;
-    width: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: width 0.3s ease;
-  }
-  
-  #back-btn {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-  }
-  
-  .main-content {
-    flex: 1;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-  }
-  
-  .title {
-    font-size: 28px;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .reservation-form {
-    background: #fff;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 100%;
-    max-width: 600px;
-  }
-  
-  .form-label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-  }
-  
-  .form-input {
-    width: 100%; /* Ensures the input fills the container */
-    max-width: 100%; /* Prevents overflow */
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-sizing: border-box; /* Includes padding and border in width calculation */
-  }
-  
-  .form-btn {
-    width: 100%;
-    padding: 10px;
-    background: #333;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-top: 10px; /* Adds spacing above the button */
-  }
-  
-  .room-options {
-    margin-top: 20px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-  }
-  
-  .room-card {
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 15px;
-    width: calc(50% - 20px);
-    max-width: 300px;
-    text-align: center;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .profile-widget {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-  }
-  
-  .profile-btn {
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-  }
-  
-  /* Modal Styles */
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  
-  .modal-content {
-    background-color: #fff;
-    margin: 10% auto;
-    padding: 20px;
-    border-radius: 12px;
-    width: 90%;
-    max-width: 500px;
-    text-align: left;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 0.3s ease-in-out;
-  }
-  
-  .modal-content h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333;
-    text-align: center;
-  }
-  
-  .modal-content label {
-    display: block;
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 8px;
-    text-align: left;
-  }
-  
-  .modal-content input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 14px;
-  }
-  
-  .modal-content button {
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #333;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-  
-  .modal-content button:hover {
-    background-color: #555;
-  }
-  
-  .modal-content .cancel-btn {
-    background-color: #aaa;
-    margin-top: 10px;
-  }
-  
-  .modal-content .cancel-btn:hover {
-    background-color: #888;
-  }
-  
-  /*rating star*/
-  #star-rating span {
-    font-size: 24px;
-    cursor: pointer;
-    color: gray; /* Default unselected color */
-    transition: color 0.2s ease-in-out;
-  }
-  
-  #star-rating span:hover {
-    color: gold; /* Highlight on hover */
-  }
-  
-  #star-rating span.selected {
-    color: gold; /* Highlight selected stars */
-  }
-  
-  
-  /* Smooth animation for modal pop-up */
-  @keyframes fadeIn {
-    from {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom right, #ffffff, #f0f0f0);
+  color: #333;
+  overflow-x: hidden;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100%;
+}
+
+/*.sidebar {
+  background: #6e6e6e;
+  color: #fff;
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: width 0.3s ease;
+  background: #6e6e6e;
+  color: #fff;
+  width: 60px;  
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; 
+  padding-top: 10px; 
+  position: fixed; 
+  top: 0;
+  left: 0;
+  height: 100%;
+}*/
+
+#back-btn {
+  background-color: #6e6e6e;  /* Light gray background */
+  border: none;
+  font-size: 24px;  /* Arrow size */
+  color: #fff;  /* Dark color for the arrow */
+  cursor: pointer;
+  padding: 12px;  /* Space around the arrow */
+  border-radius: 50%;  /* Circular shape */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+
+  position: absolute;  /* Position the button relative to its container */
+  top: 20px;  /* Align it to the same vertical level as the profile button */
+  left: 20px;  /* Move it to the left side of the page */
+}
+
+/* Optional: Style the back button on hover */
+#back-btn:hover {
+  background-color: #bbb;  /* Darker gray when hovered */
+  transform: scale(1.1);
+}
+
+/* Focus effect for accessibility */
+#back-btn:focus {
+  outline: none; /* Remove outline */
+  box-shadow: 0 0 0 3px rgba(72, 133, 255, 0.6); /* Blue focus shadow */
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.title {
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.reservation-form {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.form-input {
+  width: 100%;
+  max-width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.form-btn {
+  width: 100%;
+  padding: 10px;
+  background: #333;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.room-options {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.room-card {
+  /*background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  width: calc(50% - 20px);
+  max-width: 300px;
+  text-align: center;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);*/
+  background: #fff;
+  border-radius: 12px;  /* Rounded corners */
+  padding: 20px;  /* Increased padding for a clean look */
+  width: calc(50% - 20px); /* Make the cards responsive */
+  max-width: 300px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);  /* Soft shadow for depth */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;  /* Smooth hover effect */
+  margin-bottom: 20px;  /* Space between cards */
+  overflow: hidden;  /* Prevent any overflow */
+
+}
+
+/* Hover Effect */
+.room-card:hover {
+  transform: translateY(-5px);  /* Lift the card on hover */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);  /* More prominent shadow */
+}
+
+/* Room Card Title Styling */
+.room-card .room-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;  /* Dark color for better contrast */
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;  /* Spacing for a modern touch */
+}
+
+/* Room Card Description Styling */
+.room-card .room-description {
+  font-size: 14px;
+  color: #777;  /* Lighter color for the description */
+  margin-bottom: 20px;
+}
+
+/* Room Card Action Button Styling */
+.room-card .action-btn {
+  background-color: #007bff;  /* Modern blue */
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  text-transform: uppercase;  /* Capitalize the button text */
+  letter-spacing: 1px;
+  transition: background-color 0.3s ease;
+}
+
+.room-card .action-btn:hover {
+  background-color: #0056b3;  /* Darker blue on hover */
+}
+
+.profile-widget {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.profile-btn {
+  /*background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;*/
+  background-color: #6e6e6e; /* Green background for the circular button */
+  border: none; /* Remove default button borders */
+  border-radius: 50%; /* Make the button circular */
+  padding: 15px; /* Adds space inside the button */
+  width: 60px; /* Size of the circular button */
+  height: 60px; /* Size of the circular button */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add subtle shadow for depth */
+  transition: all 0.3s ease; /* Smooth transition for hover effect */
+}
+
+/* Optional hover effect */
+.profile-btn:hover {
+  background-color: #555; /* Darker gray on hover */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+}
+
+/* Focus effect for accessibility */
+.profile-btn:focus {
+  outline: none; /* Remove outline */
+  box-shadow: 0 0 0 3px rgba(72, 133, 255, 0.6); /* Focus shadow (blue) */
+}
+
+/* Profile Image inside the button */
+.profile-image {
+  width: 40px; /* Profile picture size */
+  height: 40px; /* Profile picture size */
+  border-radius: 50%; /* Make the image circular */
+  object-fit: cover; /* Ensure the image covers the circle */
+  border: 2px solid #fff; /* Optional: white border around the image */
+}
+
+/* Optional hover effect */
+.profile-btn:hover {
+  background-color: #555; /* Darker shade of green on hover */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+}
+
+/* Focus effect for accessibility */
+.profile-btn:focus {
+  outline: none; /* Remove outline */
+  box-shadow: 0 0 0 3px rgba(72, 133, 255, 0.6); /* Focus shadow (blue) */
+}
+
+
+/* Status Section Styling */
+#reservation-status-container {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 30px;
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#reservation-status-container p {
+  font-size: 16px;
+  color: #333;
+  margin: 0;
+  font-weight: 600;
+}
+
+#cancel-booking-btn {
+  display: none;  /* Hide by default */
+  margin-top: 15px;
+  padding: 12px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#cancel-booking-btn:hover {
+  background-color: #c82333;
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  text-align: left;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
+}
+
+.modal-content label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.modal-content button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #333;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.modal-content button:hover {
+  background-color: #555;
+}
+
+.modal-content .cancel-btn {
+  background-color: #aaa;
+  margin-top: 10px;
+}
+
+.modal-content .cancel-btn:hover {
+  background-color: #888;
+}
+
+/* Cancellation Modal Enhancements */
+#cancellation-modal .modal-content {
+  background-color: #fef9f9;
+}
+
+#confirm-cancel-btn {
+  background-color: #28a745;
+}
+
+#confirm-cancel-btn:hover {
+  background-color: #218838;
+}
+
+#cancel-cancel-btn {
+  background-color: #dc3545;
+}
+
+#cancel-cancel-btn:hover {
+  background-color: #c82333;
+}
+
+/* Rating Stars */
+#star-rating span {
+  font-size: 24px;
+  cursor: pointer;
+  color: gray;
+  transition: color 0.2s ease-in-out;
+}
+
+#star-rating span:hover,
+#star-rating span.selected {
+  color: gold;
+}
+
+/* Smooth animation for modal pop-up */
+@keyframes fadeIn {
+  from {
       opacity: 0;
       transform: scale(0.95);
-    }
-    to {
+  }
+  to {
       opacity: 1;
       transform: scale(1);
-    }
   }
-  
-  /* Responsive Design */
-  @media (max-width: 1024px) {
-    .container {
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .container {
       flex-direction: column;
       padding: 10px;
-    }
-  
-    .sidebar {
+  }
+
+  .sidebar {
       width: 50px;
       height: 60px;
       justify-content: space-between;
       align-items: center;
       padding: 0 10px;
-    }
-  
-    .room-card {
+  }
+
+  .room-card {
       width: calc(100% - 20px);
       margin: 10px 0;
-    }
-  
-    .reservation-form {
-      max-width: 600px; /* Ensures the form stays within the viewport */
-      margin: 0 auto; /* Centers the form on larger screens */
+  }
+
+  .reservation-form {
+      max-width: 600px;
+      margin: 0 auto;
       padding: 20px;
       box-sizing: border-box;
-    }
-  
-    .title {
-      font-size: 24px;
-      text-align: center;
-    }
-  
-    .profile-widget {
-      top: 10px;
-      right: 10px;
-    }
-  
-    .modal-content {
+  }
+
+  .modal-content {
       width: 80%;
       max-width: 450px;
-    }
   }
-  
-  @media (max-width: 768px) {
-    .sidebar {
+}
+
+@media (max-width: 768px) {
+  .sidebar {
       width: 100%;
       height: 50px;
       flex-direction: row;
       justify-content: space-between;
       padding: 0 20px;
-    }
-  
-    .main-content {
+  }
+
+  .main-content {
       padding: 10px;
-    }
-  
-    .room-card {
+  }
+
+  .room-card {
       width: 100%;
       margin: 10px 0;
-    }
-  
-    .reservation-form {
-      padding: 15px;
-    }
-  
-    .modal-content {
+  }
+
+  .modal-content {
       width: 90%;
       max-width: 400px;
-    }
-  
-    .title {
-      font-size: 20px;
-      text-align: center;
-    }
   }
-  
-  @media (max-width: 480px) {
-    body {
+}
+
+@media (max-width: 480px) {
+  body {
       font-size: 14px;
-    }
-  
-    .title {
+  }
+
+  .title {
       font-size: 18px;
       margin-bottom: 10px;
-    }
-  
-    .reservation-form {
-      padding: 10px;
-    }
-  
-    .room-card {
-      width: 100%;
-      margin: 10px 0;
-    }
-  
-    .modal-content {
+  }
+
+  .modal-content {
       margin: 15% auto;
       width: 85%;
       max-width: 380px;
-    }
-  
-    .modal-content h2 {
-      font-size: 20px;
-    }
-  
-    .modal-content label,
-    .modal-content input {
-      font-size: 14px;
-    }
-  
-    .modal-content button {
-      font-size: 14px;
-    }
   }
+
+  .modal-content h2 {
+      font-size: 20px;
+  }
+
+  .modal-content label,
+  .modal-content input {
+      font-size: 14px;
+  }
+
+  .modal-content button {
+      font-size: 14px;
+  }
+}

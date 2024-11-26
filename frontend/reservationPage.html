@@ -8,9 +8,9 @@
 </head>
 <body>
   <div class="container">
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <button id="back-btn">←</button>
+    <!-- Back Button only -->
+    <div class="back-btn-container">
+      <button id="back-btn" class="back-btn">←</button>
     </div>
 
     <!-- Main Content -->
@@ -33,7 +33,9 @@
 
     <!-- Profile Widget -->
     <div class="profile-widget">
-      <button id="profile-btn" class="profile-btn">👤</button>
+      <button id="profile-btn" class="profile-btn">
+        <img src="assets/img/person.png" alt="Profile Picture" class="profile-image" />
+      </button>
     </div>
   </div>
 
@@ -66,20 +68,10 @@
     </div>
   </div>
 
-  <!-- Rating Modal -->
-  <div id="rating-modal" class="modal">
-    <div class="modal-content">
-      <h2>Rate the Room</h2>
-      <div id="star-rating">
-        <span data-star="1">⭐</span>
-        <span data-star="2">⭐</span>
-        <span data-star="3">⭐</span>
-        <span data-star="4">⭐</span>
-        <span data-star="5">⭐</span>
-      </div>
-      <button id="submit-rating-btn" class="form-btn">Submit</button>
-      <button id="close-rating-btn" class="form-btn">Close</button>
-    </div>
+  <!-- Reservation Status -->
+  <div id="reservation-status-container">
+    <p id="reservation-status">Loading reservation status...</p>
+    <button id="cancel-reservation-btn" class="form-btn" style="display: none;">Cancel Reservation</button>
   </div>
 
   <!-- Link to external JavaScript -->

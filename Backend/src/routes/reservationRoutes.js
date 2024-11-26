@@ -6,5 +6,6 @@ const router = express.Router();
 
 router.post("/reserve", reservationController.createReservation);
 router.post("/cancel", reservationController.cancelReservation);
+router.post("/check-reservation", reservationController.checkUserReservation);
 
 export default router;
